@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "npm run buildDecrypt && tsc && vite build",
     "preview": "vite preview",
+    "buildDecrypt": "node buildDecrypt.js",
     "test": "vitest"
   },
   "devDependencies": {
