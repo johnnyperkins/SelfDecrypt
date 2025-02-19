@@ -57,7 +57,8 @@ describe('bufferToBase64', () => {
 
 describe('base64ToBuffer and bufferToBase64 combination', () => {
   it('converts base64 to buffer and back to base64, resulting in the original base64 string', () => {
-    const originalBase64String = 'VGhpcyBpcyBzb21lIHRlc3Qgc3RyaW5nIHdpdGggc3BlY2lhbCBjaGFyYWN0ZXJzICFAIyQlXiAmICogKCkgXyArIC09W117fTpcIjtgJyw8Pi4vPw=='
+    const originalBase64String =
+      'VGhpcyBpcyBzb21lIHRlc3Qgc3RyaW5nIHdpdGggc3BlY2lhbCBjaGFyYWN0ZXJzICFAIyQlXiAmICogKCkgXyArIC09W117fTpcIjtgJyw8Pi4vPw=='
     const buffer = base64ToBuffer(originalBase64String)
     const convertedBase64String = bufferToBase64(buffer)
 
@@ -66,7 +67,8 @@ describe('base64ToBuffer and bufferToBase64 combination', () => {
 
   it('converts buffer to base64 and back to buffer, resulting in the original buffer', () => {
     const textEncoder = new TextEncoder()
-    const originalString = 'This is some test string with special characters !@#$%^ & *()_+ -=[]{};\':"`,<.>/?'
+    const originalString =
+      'This is some test string with special characters !@#$%^ & *()_+ -=[]{};\':"`,<.>/?'
     const originalBuffer = textEncoder.encode(originalString).buffer
     const base64String = bufferToBase64(originalBuffer)
     const convertedBuffer = base64ToBuffer(base64String)

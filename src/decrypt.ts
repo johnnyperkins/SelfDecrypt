@@ -2,8 +2,12 @@ import * as age from 'age-encryption'
 import { base64ToBuffer } from './utils/encoding'
 
 document.addEventListener('DOMContentLoaded', () => {
-  const decryptPasswordInput = document.getElementById('decryptPassword') as HTMLInputElement
-  const decryptButton = document.getElementById('decryptButton') as HTMLButtonElement
+  const decryptPasswordInput = document.getElementById(
+    'decryptPassword',
+  ) as HTMLInputElement
+  const decryptButton = document.getElementById(
+    'decryptButton',
+  ) as HTMLButtonElement
 
   decryptButton.addEventListener('click', async () => {
     const decryptPassword = decryptPasswordInput.value

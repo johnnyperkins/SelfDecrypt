@@ -9,10 +9,18 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = encryptTemplate
 
 document.addEventListener('DOMContentLoaded', () => {
   const fileInput = document.getElementById('fileInput') as HTMLInputElement
-  const passwordInput = document.getElementById('passwordInput') as HTMLInputElement
-  const encryptButton = document.getElementById('encryptButton') as HTMLButtonElement
-  const downloadLinkContainer = document.getElementById('downloadLinkContainer') as HTMLDivElement
-  const downloadLink = document.getElementById('downloadLink') as HTMLAnchorElement
+  const passwordInput = document.getElementById(
+    'passwordInput',
+  ) as HTMLInputElement
+  const encryptButton = document.getElementById(
+    'encryptButton',
+  ) as HTMLButtonElement
+  const downloadLinkContainer = document.getElementById(
+    'downloadLinkContainer',
+  ) as HTMLDivElement
+  const downloadLink = document.getElementById(
+    'downloadLink',
+  ) as HTMLAnchorElement
 
   encryptButton.addEventListener('click', async () => {
     const file = fileInput.files?.[0]
@@ -36,7 +44,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })
 
-  const encryptAndWrapFile = async (file: File, password: string): Promise<string> => {
+  const encryptAndWrapFile = async (
+    file: File,
+    password: string,
+  ): Promise<string> => {
     const fileBuffer = await file.arrayBuffer()
 
     const encrypter = new age.Encrypter()
@@ -46,9 +57,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const base64Ciphertext = bufferToBase64(ciphertextBytes.buffer)
     const originalFilename = file.name
 
-    const templateWithScript = decryptTemplate.replace('REPLACE_WITH_SCRIPT_BUNDLE', decryptScripts)
-    const templateWithFileName = templateWithScript.replaceAll('REPLACE_WITH_ORIGINAL_FILENAME', originalFilename)
-    const hydratedTemplate = templateWithFileName.replace('REPLACE_WITH_ENCRYPTED_DATA', base64Ciphertext)
+    const templateWithScript = decryptTemplate.replace(
+      'REPLACE_WITH_SCRIPT_BUNDLE',
+      decryptScripts,
+    )
+    const templateWithFileName = templateWithScript.replaceAll(
+      'REPLACE_WITH_ORIGINAL_FILENAME',
+      originalFilename,
+    )
+    const hydratedTemplate = templateWithFileName.replace(
+      'REPLACE_WITH_ENCRYPTED_DATA',
+      base64Ciphertext,
+    )
 
     return hydratedTemplate
   }
