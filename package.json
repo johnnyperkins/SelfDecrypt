@@ -8,7 +8,9 @@
     "build": "npm run buildDecrypt && tsc && vite build",
     "preview": "vite preview",
     "buildDecrypt": "node buildDecrypt.js",
-    "test": "vitest"
+    "test": "vitest",
+    "format": "npx @biomejs/biome format --write ./",
+    "lint": "npx @biomejs/biome lint --write ./"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
