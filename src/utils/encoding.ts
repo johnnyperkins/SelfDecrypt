@@ -17,3 +17,6 @@ export const bufferToBase64 = (buffer: ArrayBuffer): string => {
   }
   return btoa(binary)
 }
+
+export const base64ToUint8Array = (base64Ciphertext: string): Uint8Array =>
+  new Uint8Array(base64ToBuffer(base64Ciphertext))

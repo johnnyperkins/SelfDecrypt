@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { base64ToBuffer, bufferToBase64 } from './encoding'
+import { base64ToBuffer, bufferToBase64, base64ToUint8Array } from './encoding'
 
 describe('base64ToBuffer', () => {
   it('converts a valid base64 string to an ArrayBuffer', () => {
@@ -74,5 +74,23 @@ describe('base64ToBuffer and bufferToBase64 combination', () => {
     const convertedBuffer = base64ToBuffer(base64String)
 
     expect(convertedBuffer).toEqual(originalBuffer)
+  })
+})
+
+describe('base64ToUint8Array', () => {
+  it('converts valid base64 to Uint8Array', () => {
+    const originalString = '•øØø¥øØø•'
+    const base64String = bufferToBase64(
+      new TextEncoder().encode(originalString).buffer,
+    )
+    const uint8Array = base64ToUint8Array(base64String)
+    expect(uint8Array).toBeInstanceOf(Uint8Array)
+    expect(new TextDecoder().decode(uint8Array)).toBe(originalString)
+  })
+
+  it('handles empty base64 string', () => {
+    const uint8Array = base64ToUint8Array('')
+    expect(uint8Array).toBeInstanceOf(Uint8Array)
+    expect(uint8Array.length).toBe(0)
   })
 })
