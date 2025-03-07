@@ -34,7 +34,7 @@ export function runCommandOnFileChangePlugin(command, filesToWatch = []) {
 
 export default {
   plugins: [
-    runCommandOnFileChangePlugin('buildDecrypt',[
+    runCommandOnFileChangePlugin('buildDecrypt', [
       'src/templates/decryptTemplate.html',
       'src/decrypt.ts'
     ])
