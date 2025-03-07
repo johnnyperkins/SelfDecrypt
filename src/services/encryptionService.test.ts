@@ -5,20 +5,26 @@ import type {
   EncryptionResultFailure,
 } from './encryptionService'
 
-type Success = EncryptionResultSuccess<Uint8Array<ArrayBufferLike>>
+const createMockFile = (content: string): File => {
+  const blob = new Blob([content], { type: 'text/plain' })
+  return Object.assign(blob, {
+    name: 'secrets.txt',
+    lastModified: Date.now(),
+  }) as File
+}
 
 describe('encryption utils', () => {
   describe('encryptFile & decryptFile', () => {
     it('encrypts and decrypts a file', async () => {
       const fileContent = 'plain text oh no!'
-      const fileBuffer = new TextEncoder().encode(fileContent).buffer
+      const file = createMockFile(fileContent)
       const password = 'theywillneverguessthis'
 
       // encrypt
       const encryptedResult = (await encryptFile(
-        fileBuffer,
+        file,
         password,
-      )) as Success
+      )) as EncryptionResultSuccess
       expect(encryptedResult.success).toBe(true)
       expect(encryptedResult.value).toBeInstanceOf(Uint8Array)
 
@@ -26,7 +32,7 @@ describe('encryption utils', () => {
       const decryptedResult = (await decryptFile(
         encryptedResult.value,
         password,
-      )) as Success
+      )) as EncryptionResultSuccess
       expect(decryptedResult.success).toBe(true)
       expect(new TextDecoder().decode(decryptedResult.value)).toEqual(
         fileContent,
@@ -51,12 +57,15 @@ describe('encryption utils', () => {
 
   describe('decryptFile', () => {
     it('returns a DecryptionFailed error result if decryption fails due to incorrect password', async () => {
-      const fileBuffer = new TextEncoder().encode('wow').buffer
+      const file = createMockFile('wow')
       const password = 'guess_me'
       const wrongPassword = 'is-it-this'
 
       // encrypt
-      const encryptResult = (await encryptFile(fileBuffer, password)) as Success
+      const encryptResult = (await encryptFile(
+        file,
+        password,
+      )) as EncryptionResultSuccess
       expect(encryptResult.success).toBe(true)
 
       // attempt decrypt
