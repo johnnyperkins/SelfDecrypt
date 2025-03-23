@@ -36,7 +36,8 @@ export default {
   plugins: [
     runCommandOnFileChangePlugin('buildDecrypt', [
       'src/templates/decryptTemplate.html',
-      'src/decrypt.ts'
+      'src/ui/decryptUiHandler.ts',
+      'src/decrypt.ts',
     ])
   ]
 }
