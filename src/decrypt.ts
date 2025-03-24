@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     'click',
     createDecryptHandler(
       decryptPasswordInput,
+      decryptButton,
       base64Ciphertext,
       originalFilename,
     ),

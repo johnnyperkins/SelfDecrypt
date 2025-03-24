@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
       passwordInput,
       downloadLinkContainer,
       downloadLink,
+      encryptButton,
     ),
   )
 })

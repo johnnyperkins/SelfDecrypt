@@ -1,10 +1,12 @@
 import { decryptFile } from '../services/encryptionService'
 import { base64ToUint8Array } from '../utils/encoding'
-import { initiateDownload } from '../utils/dom'
+import { initiateDownload, setDecryptButtonLoading } from '../utils/dom'
+import { delay } from '../utils/async'
 
 export const createDecryptHandler =
   (
     decryptPasswordInput: HTMLInputElement,
+    decryptButton: HTMLButtonElement,
     base64Ciphertext: string,
     originalFilename: string,
   ) =>
@@ -15,8 +17,13 @@ export const createDecryptHandler =
       return
     }
 
+    setDecryptButtonLoading(decryptButton, true)
+    await delay()
+
     const ciphertextBytes: Uint8Array = base64ToUint8Array(base64Ciphertext)
     const decryptResult = await decryptFile(ciphertextBytes, decryptPassword)
+
+    setDecryptButtonLoading(decryptButton, false)
 
     if (decryptResult.success) {
       initiateDownload(decryptResult.value, originalFilename)

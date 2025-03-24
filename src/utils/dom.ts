@@ -59,3 +59,28 @@ export const getDecryptPageElements = () => {
 
   return { decryptPasswordInput, decryptButton }
 }
+
+export const ENCRYPT_BUTTON_DEFAULT_TEXT = 'Encrypt File'
+export const ENCRYPT_BUTTON_LOADING_TEXT = 'Encrypting...'
+export const DECRYPT_BUTTON_DEFAULT_TEXT = 'Decrypt File'
+export const DECRYPT_BUTTON_LOADING_TEXT = 'Decrypting...'
+
+export const setEncryptButtonLoading = (
+  encryptButton: HTMLButtonElement,
+  loading: boolean,
+) => {
+  encryptButton.textContent = loading
+    ? ENCRYPT_BUTTON_LOADING_TEXT
+    : ENCRYPT_BUTTON_DEFAULT_TEXT
+  encryptButton.disabled = loading
+}
+
+export const setDecryptButtonLoading = (
+  decryptButton: HTMLButtonElement,
+  loading: boolean,
+) => {
+  decryptButton.textContent = loading
+    ? DECRYPT_BUTTON_LOADING_TEXT
+    : DECRYPT_BUTTON_DEFAULT_TEXT
+  decryptButton.disabled = loading
+}

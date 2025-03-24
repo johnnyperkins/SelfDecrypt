@@ -17,7 +17,8 @@ const buildDecryptBundle = async () => {
       globalName: 'decryptScriptBundle',
       minify: true,
     })
-    console.log('Decrypt script bundled successfully to dist/decrypt-bundle.js')
+    const currentTime = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+    console.log(`${currentTime}: Decrypt script bundled successfully to dist/decrypt-bundle.js`)
   } catch (error) {
     console.error('Error bundling decrypt script:', error)
     process.exit(1)
