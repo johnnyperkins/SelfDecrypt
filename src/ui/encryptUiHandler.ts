@@ -2,9 +2,11 @@ import { encryptFile } from '../services/encryptionService'
 import { createDownloadLink, setEncryptButtonLoading } from '../utils/dom'
 import { bufferToBase64 } from '../utils/encoding'
 import { hydrateTemplate } from '../utils/template'
+import { delay } from '../utils/async'
+
 import decryptScripts from '../injectedScripts/decrypt-bundle.js?raw'
 import decryptTemplate from '../templates/decryptTemplate.html?raw'
-import { delay } from '../utils/async'
+import styles from '../style.css?raw'
 
 export const createEncryptHandler =
   (
@@ -40,6 +42,7 @@ export const createEncryptHandler =
 
     const hydratedTemplate = hydrateTemplate(decryptTemplate, {
       REPLACE_WITH_SCRIPT_BUNDLE: decryptScripts,
+      REPLACE_WITH_STYLES: `<style>${styles}</style>`,
       REPLACE_WITH_ORIGINAL_FILENAME: file.name,
       REPLACE_WITH_ENCRYPTED_DATA: encryptResultBase64,
     })

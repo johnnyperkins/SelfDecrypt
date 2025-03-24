@@ -3,7 +3,7 @@ import encryptTemplate from './templates/encryptTemplate.html?raw'
 import { getEncryptPageElements } from './utils/dom'
 import './style.css'
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = encryptTemplate
+document.querySelector<HTMLDivElement>('body')!.innerHTML = encryptTemplate
 
 document.addEventListener('DOMContentLoaded', () => {
   const {
