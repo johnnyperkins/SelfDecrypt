@@ -1,5 +1,6 @@
 import { exec } from 'child_process'
 import path from 'path'
+import { viteSingleFile } from 'vite-plugin-singlefile'
 
 export function runCommandOnFileChangePlugin(command, filesToWatch = []) {
   const rootDir = process.cwd()
@@ -34,10 +35,17 @@ export function runCommandOnFileChangePlugin(command, filesToWatch = []) {
 
 export default {
   plugins: [
+    viteSingleFile(),
     runCommandOnFileChangePlugin('buildDecrypt', [
       'src/templates/decryptTemplate.html',
       'src/ui/decryptUiHandler.ts',
       'src/decrypt.ts',
     ])
-  ]
+  ],
+  build: {
+    outDir: 'dist',
+    rollupOptions: {
+      input: 'index.html',
+    },
+  },
 }
