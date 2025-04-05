@@ -27,6 +27,7 @@ export const createDecryptHandler =
 
     if (decryptResult.success) {
       initiateDownload(decryptResult.value, originalFilename)
+      decryptPasswordInput.value = ''
     } else {
       console.error('Decryption error:', decryptResult.error)
       alert('Decryption failed. Incorrect password or corrupted file')

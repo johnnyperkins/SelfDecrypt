@@ -53,4 +53,6 @@ export const createEncryptHandler =
       downloadLink,
       downloadLinkContainer,
     )
+
+    passwordInput.value = ''
   }
